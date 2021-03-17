@@ -1,4 +1,4 @@
-<footer class="border-t border-gray-800 py-6 px-8 text-sm mt-16">
+<footer class="py-6 px-8 text-sm">
     <div class="container mx-auto">
         <div class="flex flex-col items-center justify-center">
             <div>

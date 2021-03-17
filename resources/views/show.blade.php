@@ -62,7 +62,7 @@
             <div class="px-8 py-16">
                 <h2 class="text-3xl font-bold">Images</h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     <div class="movieCard mt-8">
                         <a href="#">
                             <img src="{{ asset('/images/image1.jpg') }}" alt="Image 1" title="Image 1" class="hover:opacity-75 transition ease-in-out duration-150" />
@@ -93,73 +93,75 @@
         </div>
     </div>
 
-    <div class="container mx-auto">
-        <div class="px-8 py-16">
-            <h2 class="text-3xl font-bold">Cast</h2>
+    <div class="border-b border-gray-800">
+        <div class="container mx-auto">
+            <div class="px-8 py-16">
+                <h2 class="text-3xl font-bold">Cast</h2>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-                <div class="movieCard mt-8">
-                    <a href="#">
-                        <img src="{{ asset('/images/actor1.jpg') }}" alt="Actor 1" title="Actor 1" class="hover:opacity-75 transition ease-in-out duration-150" />
-                    </a>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/actor1.jpg') }}" alt="Actor 1" title="Actor 1" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
 
-                    <div class="mt-2">
-                        <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
+                        <div class="mt-2">
+                            <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
 
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            John Smith
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                John Smith
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="movieCard mt-8">
-                    <a href="#">
-                        <img src="{{ asset('/images/actor2.jpg') }}" alt="Actor 2" title="Actor 2" class="hover:opacity-75 transition ease-in-out duration-150" />
-                    </a>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/actor2.jpg') }}" alt="Actor 2" title="Actor 2" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
 
-                    <div class="mt-2">
-                        <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
+                        <div class="mt-2">
+                            <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
 
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            John Smith
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                John Smith
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="movieCard mt-8">
-                    <a href="#">
-                        <img src="{{ asset('/images/actor3.jpg') }}" alt="Actor 3" title="Actor 3" class="hover:opacity-75 transition ease-in-out duration-150" />
-                    </a>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/actor3.jpg') }}" alt="Actor 3" title="Actor 3" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
 
-                    <div class="mt-2">
-                        <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
+                        <div class="mt-2">
+                            <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
 
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            John Smith
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                John Smith
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="movieCard mt-8">
-                    <a href="#">
-                        <img src="{{ asset('/images/actor4.jpg') }}" alt="Actor 4" title="Actor 4" class="hover:opacity-75 transition ease-in-out duration-150" />
-                    </a>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/actor4.jpg') }}" alt="Actor 4" title="Actor 4" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
 
-                    <div class="mt-2">
-                        <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
+                        <div class="mt-2">
+                            <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
 
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            John Smith
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                John Smith
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="movieCard mt-8">
-                    <a href="#">
-                        <img src="{{ asset('/images/actor5.jpg') }}" alt="Actor 5" title="Actor 5" class="hover:opacity-75 transition ease-in-out duration-150" />
-                    </a>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/actor5.jpg') }}" alt="Actor 5" title="Actor 5" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
 
-                    <div class="mt-2">
-                        <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
+                        <div class="mt-2">
+                            <a href="#" class="text-lg hover:text-gray-300 focus:text-gray-300 focus:outline-none">Real Name</a>
 
-                        <div class="flex items-center text-gray-400 text-sm mt-1">
-                            John Smith
+                            <div class="flex items-center text-gray-400 text-sm mt-1">
+                                John Smith
+                            </div>
                         </div>
                     </div>
                 </div>
