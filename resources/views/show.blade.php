@@ -57,6 +57,42 @@
         </div>
     </div>
 
+    <div class="border-b border-gray-800">
+        <div class="container mx-auto">
+            <div class="px-8 py-16">
+                <h2 class="text-3xl font-bold">Images</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/image1.jpg') }}" alt="Image 1" title="Image 1" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
+                    </div>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/image2.jpg') }}" alt="Image 2" title="Image 2" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
+                    </div>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/image3.jpg') }}" alt="Image 3" title="Image 3" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
+                    </div>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/image4.jpg') }}" alt="Image 4" title="Image 4" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
+                    </div>
+                    <div class="movieCard mt-8">
+                        <a href="#">
+                            <img src="{{ asset('/images/image5.jpg') }}" alt="Image 5" title="Image 5" class="hover:opacity-75 transition ease-in-out duration-150" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container mx-auto">
         <div class="px-8 py-16">
             <h2 class="text-3xl font-bold">Cast</h2>
