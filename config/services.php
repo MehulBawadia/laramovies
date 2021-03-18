@@ -30,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'tmdb' => [
+        'base_url' => 'https://api.themoviedb.org/3',
+        'token' => env('TMDB_API_TOEKN'),
+    ],
+
 ];
