@@ -19,13 +19,7 @@
             </ul>
 
             <div class="flex flex-col md:flex-row items-center">
-                <div class="relative mt-3 md:mt-0">
-                    <input type="text" class="bg-gray-800 text-sm rounded-full w-64 pl-8 py-1 focus:outline-none focus:ring" placeholder="Search..." />
-
-                    <div class="absolute top-0 flex items-center h-full ml-2">
-                        <svg class="fill-current text-gray-100 w-4" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                    </div>
-                </div>
+                <livewire:search-drop-down />
 
                 <div class="md:ml-6 mt-3 md:mt-0">
                     <a href="#"><img src="{{ asset('/images/avatar.png') }}" alt="Default Avatar" title="Default Avatar" class="rounded-full w-8" /></a>
