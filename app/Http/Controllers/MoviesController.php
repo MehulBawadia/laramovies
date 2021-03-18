@@ -26,4 +26,13 @@ class MoviesController extends Controller
 
         return view('welcome', compact('popularMovies', 'nowPlayingMovies', 'genres'));
     }
+
+    public function show($movieId)
+    {
+        $movie = Http::withToken(config('services.tmdb.token'))
+                    ->get(config('services.tmdb.base_url') . '/movie/' . $movieId . '?append_to_response=credits,videos,images')
+                    ->json();
+
+        return view('show', compact('movie'));
+    }
 }
