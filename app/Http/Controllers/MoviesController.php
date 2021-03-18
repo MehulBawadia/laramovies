@@ -12,6 +12,10 @@ class MoviesController extends Controller
                             ->get(config('services.tmdb.base_url') . '/movie/popular')
                             ->json()['results'];
 
+        $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))
+                            ->get(config('services.tmdb.base_url') . '/movie/now_playing')
+                            ->json()['results'];
+
         $genres = Http::withToken(config('services.tmdb.token'))
                             ->get(config('services.tmdb.base_url') . '/genre/movie/list')
                             ->json()['genres'];
@@ -20,6 +24,6 @@ class MoviesController extends Controller
             return [$genre['id'] => $genre['name']];
         });
 
-        return view('welcome', compact('popularMovies', 'genres'));
+        return view('welcome', compact('popularMovies', 'nowPlayingMovies', 'genres'));
     }
 }
