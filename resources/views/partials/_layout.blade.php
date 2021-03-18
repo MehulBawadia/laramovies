@@ -6,6 +6,8 @@
     @yield('title')
 
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}" />
+
+    <livewire:styles>
 </head>
 <body class="bg-gray-900 text-white font-sans">
     @include('partials._nav')
@@ -13,5 +15,7 @@
     @yield('content')
 
     @include('partials._footer')
+
+    <livewire:scripts>
 </body>
 </html>
