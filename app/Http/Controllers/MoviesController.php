@@ -24,7 +24,7 @@ class MoviesController extends Controller
 
         $viewModel = new MoviesListModel($popularMovies, $nowPlayingMovies, $genres);
 
-        return view('welcome', $viewModel);
+        return view('movies.index', $viewModel);
     }
 
     public function show($movieId)
@@ -35,6 +35,6 @@ class MoviesController extends Controller
 
         $viewModel = new SingleMovieViewModel($movie);
 
-        return view('show', $viewModel);
+        return view('movies.show', $viewModel);
     }
 }
