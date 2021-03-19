@@ -17,14 +17,10 @@
             <ul>
                 @forelse ($searchResults as $result)
                     <li class="border-b border-gray-700">
-                        <a href="{{ route('movies.show', $result['id']) }}" class="block px-3 py-2 hover:bg-gray-700 flex items-center" @if ($loop->last) @keydown.tab="isOpen = false" @endif>
-                            @if ($result['poster_path'])
-                                <img src="https://image.tmdb.org/t/p/w92/{{ $result['poster_path'] }}" alt="{{ $result['title'] }}" class="w-8">
-                            @else
-                                <img src="https://via.placeholder.com/50x75" alt="{{ $result['title'] }}" class="w-8">
-                            @endif
+                        <a href="{{ $result['page_link'] }}" class="block px-3 py-2 hover:bg-gray-700 flex items-center" @if ($loop->last) @keydown.tab="isOpen = false" @endif>
+                            <img src="{{ $result['image_path'] }}" alt="{{ $result['title_name'] }}" class="w-8">
 
-                            <span class="ml-4">{{ $result['title'] }}</span>
+                            <span class="ml-4">{{ $result['title_name'] }}</span>
                         </a>
                     </li>
                 @empty
