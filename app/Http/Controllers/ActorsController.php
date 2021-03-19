@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ViewModels\ActorsViewModel;
 use Illuminate\Support\Facades\Http;
+use App\ViewModels\SingleActorViewModel;
 
 class ActorsController extends Controller
 {
@@ -23,6 +24,20 @@ class ActorsController extends Controller
 
     public function show($actorId)
     {
-        return view('actors.show');
+        $actor = Http::withToken(config('services.tmdb.token'))
+                            ->get(config('services.tmdb.base_url') . '/person/' . $actorId)
+                            ->json();
+
+        $social = Http::withToken(config('services.tmdb.token'))
+                            ->get(config('services.tmdb.base_url') . '/person/' . $actorId . '/external_ids')
+                            ->json();
+
+        $credits = Http::withToken(config('services.tmdb.token'))
+                            ->get(config('services.tmdb.base_url') . '/person/' . $actorId . '/combined_credits')
+                            ->json();
+
+        $viewModel = new SingleActorViewModel($actor, $social, $credits);
+
+        return view('actors.show', $viewModel);
     }
 }
