@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ViewModels\MoviesListModel;
 use Illuminate\Support\Facades\Http;
 
 class MoviesController extends Controller
@@ -20,11 +21,9 @@ class MoviesController extends Controller
                             ->get(config('services.tmdb.base_url') . '/genre/movie/list')
                             ->json()['genres'];
 
-        $genres = collect($genres)->mapWithKeys(function ($genre) {
-            return [$genre['id'] => $genre['name']];
-        });
+        $viewModel = new MoviesListModel($popularMovies, $nowPlayingMovies, $genres);
 
-        return view('welcome', compact('popularMovies', 'nowPlayingMovies', 'genres'));
+        return view('welcome', $viewModel);
     }
 
     public function show($movieId)
