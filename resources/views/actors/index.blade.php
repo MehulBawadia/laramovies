@@ -43,3 +43,14 @@
         </div>
     </div>
 @endsection
+
+@section('pageScripts')
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+    <script>
+        let elem = document.querySelector('.grid');
+        let infScroll = new InfiniteScroll( elem, {
+            path: '/actors/page/@{{#}}',
+            append: '.actor',
+        });
+    </script>
+@endsection
