@@ -63,11 +63,11 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cold-4 lg:grid-cols-5 gap-8">
                             @foreach ($knownForMovies as $movie)
                                 <div class="mt-4">
-                                    <a href="{{ route('movies.show', $movie['id']) }}">
+                                    <a href="{{ $movie['linkToPage'] }}">
                                         <img src="{{ $movie['poster_path'] }}" alt="poster" class="hover:opacity-75 transition ease-in-out duration-150">
                                     </a>
 
-                                    <a href="{{ route('movies.show', $movie['id']) }}" class="mt-2 block text-sm leading-none hover:text-gray-300 focus:text-gray-300 focus:outline-none">
+                                    <a href="{{ $movie['linkToPage'] }}" class="mt-2 block text-sm leading-none hover:text-gray-300 focus:text-gray-300 focus:outline-none">
                                         {{ $movie['title'] }}
                                     </a>
                                 </div>
