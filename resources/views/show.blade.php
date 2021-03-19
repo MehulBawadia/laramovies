@@ -1,7 +1,7 @@
 @extends('partials._layout')
 
 @section('title')
-    <title>Movie Name here | {{ config('app.name') }}</title>
+    <title>{{ $movie['title'] }} | {{ config('app.name') }}</title>
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
         <div class="container mx-auto">
             <div class="px-8 py-16">
                 <div class="flex flex-col md:flex-row">
-                    <img src="{{ $movie['poster_path'] }}" alt="Parasite" class="block mx-auto w-64 lg:w-96" />
+                    <img src="{{ $movie['poster_path'] }}" alt="{{ $movie['title'] }}" class="block mx-auto w-64 lg:w-96" />
 
                     <div class="md:ml-24 mt-8 md:mt-0">
                         <h1 class="text-4xl font-bold">{{ $movie['title'] }}</h1>
