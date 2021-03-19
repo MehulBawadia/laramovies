@@ -20,4 +20,9 @@ class ActorsController extends Controller
 
         return view('actors.index', $viewModel);
     }
+
+    public function show($actorId)
+    {
+        return view('actors.show');
+    }
 }
