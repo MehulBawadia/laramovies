@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TVController;
 use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MoviesController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,6 @@ Route::get('/tv/{id}', [TVController::class, 'show'])->name('tv.show');
 Route::get('/actors', [ActorsController::class, 'index'])->name('actors.index');
 Route::get('/actors/page/{number?}', [ActorsController::class, 'index']);
 Route::get('/actors/{actor}', [ActorsController::class, 'show'])->name('actors.show');
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::post('/search', [SearchController::class, 'search'])->name('postSearch');
