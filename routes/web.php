@@ -33,5 +33,5 @@ Route::get('/search/page/{number?}', [SearchController::class, 'search']);
 Route::post('/search', [SearchController::class, 'search'])->name('postSearch');
 
 Route::get('/korean-drama', [KoreanDramaController::class, 'index'])->name('koreanDrama.index');
-Route::get('/korean-drama/fetch/{year}/{number?}', [KoreanDramaController::class, 'fetch'])->name('koreanDrama.fetch');
-Route::get('/korean-drama/page/{number?}/{year?}', [KoreanDramaController::class, 'index']);
+Route::get('/korean-drama/fetch/{year}/{genre?}/{number?}', [KoreanDramaController::class, 'fetch'])->name('koreanDrama.fetch');
+Route::get('/korean-drama/page/{number?}/{year?}/{genre?}', [KoreanDramaController::class, 'index']);

@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Cache;
 
 class KoreanDramaController extends Controller
 {
-    public function index($pageNumber = 1, $year = '2021')
+    public function index($pageNumber = 1, $year = '2021', $genre = "")
     {
         abort_if($pageNumber > 500, 204);
 
         $searchResults = Http::withToken(config('services.tmdb.token'))
-                    ->get(config('services.tmdb.base_url') . '/discover/tv?with_original_language=ko&first_air_date_year='.$year.'&page=' . $pageNumber)
+                    ->get(config('services.tmdb.base_url') . '/discover/tv?with_original_language=ko&first_air_date_year='.$year.'&with_genres='.$genre.'&page=' . $pageNumber)
                     ->json()['results'];
 
         $genres = $this->genres();
@@ -22,12 +22,12 @@ class KoreanDramaController extends Controller
         return view('korean-drama.index', compact('genres', 'searchResults', 'pageNumber'));
     }
 
-    public function fetch($year, $pageNumber = 1)
+    public function fetch($year, $genre = "", $pageNumber = 1)
     {
         abort_if($pageNumber > 500, 204);
 
         $searchResults = Http::withToken(config('services.tmdb.token'))
-                    ->get(config('services.tmdb.base_url') . '/discover/tv?with_original_language=ko&first_air_date_year='.$year.'&page=' . $pageNumber)
+                    ->get(config('services.tmdb.base_url') . '/discover/tv?with_original_language=ko&first_air_date_year='.$year.'&with_genres='.$genre.'&page=' . $pageNumber)
                     ->json()['results'];
 
         $searchResults = $this->format($searchResults);
