@@ -10,10 +10,15 @@
             <div class="px-8 py-16 popularTvShows">
                 <h2 class="uppercase tracking-wider text-lg font-bold text-yellow-600">Popular Shows</h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-                    @foreach ($searchResults as $tvShow)
-                        <x-tv-card :tvShow="$tvShow" />
+                <select name="year" id="year" class="my-8 border text-gray-100 bg-gray-500 py-2 px-2 w-1/4 focus:outline-none">
+                    <option value="">Select Year</option>
+                    @foreach (collect(range(1990, date('Y')))->sortDesc() as $year)
+                        <option value="{{ $year }}">{{ $year }}</option>
                     @endforeach
+                </select>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 htmlResult">
+                    @include('korean-drama.fetch')
                 </div>
             </div>
         </div>
@@ -21,13 +26,42 @@
 @endsection
 
 @section('pageScripts')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
     <script>
-        let elem = document.querySelector('.grid');
-        let infScroll = new InfiniteScroll( elem, {
-            path: '/korean-drama/page/@{{#}}',
+        var path = '/korean-drama/page/@{{#}}';
+        let $infScroll = $('.grid').infiniteScroll({
+            path: path,
             append: '.tvShowCard',
             status: '.page-load-status'
+        });
+
+        var selectedYear = $('select[name="year"]').find('option:selected').val();
+        $('select[name="year"]').on('change', function (e) {
+            e.preventDefault();
+
+            selectedYear = $(this).val();
+
+            var path = '/korean-drama/page/@{{#}}';
+            if (selectedYear !== "") {
+                path += '/' + selectedYear;
+            }
+
+            $infScroll.infiniteScroll('destroy');
+
+            $.ajax({
+                url: '/korean-drama/fetch/' + $(this).val(),
+                type: 'GET',
+                success: function (res) {
+                    $('.htmlResult').html(res.htmlResult);
+
+                    let $infScroll = $('.grid').infiniteScroll({
+                        path: path,
+                        append: '.tvShowCard',
+                        status: '.page-load-status'
+                    });
+                },
+            });
         });
     </script>
 @endsection
