@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\Cache;
 
 class SearchController extends Controller
 {
-    public function index()
+    public function index($pageNumber = 1)
     {
+        abort_if($pageNumber > 500, 204);
+
         session()->forget(['searchResults', 'formData']);
 
         $searchResults = Cache::remember('defaultResults', 5, function () {
@@ -21,10 +23,10 @@ class SearchController extends Controller
         $genres = $this->genres();
         $searchResults = $this->format($searchResults);
 
-        return view('search', compact('genres', 'searchResults'));
+        return view('search', compact('genres', 'searchResults', 'pageNumber'));
     }
 
-    public function search()
+    public function searchOld()
     {
         session()->forget(['formData', 'searchResults']);
 
@@ -65,6 +67,40 @@ class SearchController extends Controller
         ]);
 
         return view('search', compact('genres'));
+    }
+
+    public function search($pageNumber = 1)
+    {
+        abort_if($pageNumber > 500, 204);
+
+        if (! session('formData')) {
+            session(['formData' => request()->all()]);
+        }
+
+        $formData = session('formData');
+
+        if ($formData['movie_or_tv'] == 'movie') {
+            $apiUrlParams = '&release_date_year=' . $formData['year'];
+        }
+
+        if ($formData['movie_or_tv'] == 'tv') {
+            $apiUrlParams = '&first_air_date_year=' . $formData['year'];
+        }
+
+        $apiUrlParams .= '&with_genres=' . $formData['genre'];
+
+        $apiUrl = config('services.tmdb.base_url') . '/discover/'. $formData['movie_or_tv'] .'?with_original_language='.$formData['country'];
+        $apiUrl .= $apiUrlParams;
+
+        $search = Http::withToken(config('services.tmdb.token'))
+            ->get($apiUrl . '&page=' . $pageNumber)
+            ->json()['results'];
+
+        $searchResults = $this->format($search);
+
+        $genres = $this->genres();
+
+        return view('search', compact('searchResults', 'genres', 'pageNumber'));
     }
 
     private function genres()

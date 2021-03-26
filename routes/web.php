@@ -28,4 +28,5 @@ Route::get('/actors/page/{number?}', [ActorsController::class, 'index']);
 Route::get('/actors/{actor}', [ActorsController::class, 'show'])->name('actors.show');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+Route::get('/search/page/{number?}', [SearchController::class, 'search']);
 Route::post('/search', [SearchController::class, 'search'])->name('postSearch');

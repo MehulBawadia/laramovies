@@ -28,7 +28,7 @@
                         <div class="w-1/4 mt-5">
                             <select name="country" id="country" class="border text-gray-100 bg-gray-500 py-2 px-2 w-full focus:outline-none">
                                 <option value="" {{ session('formData')['country'] == "" ? 'selected' : '' }}>Select Country</option>
-                                <option value="kr" {{ session('formData')['country'] == "kr" ? 'selected' : '' }}>Korean</option>
+                                <option value="ko" {{ session('formData')['country'] == "kr" ? 'selected' : '' }}>Korean</option>
                                 <option value="in" {{ session('formData')['country'] == "in" ? 'selected' : '' }}>India</option>
                             </select>
                         </div>
@@ -41,9 +41,15 @@
                             </select>
                         </div>
                         <div class="w-1/4 mt-5">
-                            <button type="submit" class="bg-gray-800 py-2 w-full border-0 hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Search</button>
+                            <select name="year" id="year" class="border text-gray-100 bg-gray-500 py-2 px-2 w-full focus:outline-none">
+                                <option value="">Select Year</option>
+                                @foreach (collect(range(1990, date('Y')))->sortDesc() as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
+                    <button type="submit" class="mt-8 bg-gray-800 py-2 w-full border-0 hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Search</button>
                 </form>
             </div>
 
@@ -52,14 +58,21 @@
                     @foreach ($searchResults as $result)
                         <x-tv-card :tvShow="$result" :genres="$genres" />
                     @endforeach
-
-                    @if (session('formData')['movie_or_tv'] == 'movie')
-                        @foreach (session('searchResults') as $result)
-                            <x-movie-card :movie="$result" />
-                        @endforeach
-                    @endif
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('pageScripts')
+    <script src="https://unpkg.com/infinite-scroll@4/dist/infinite-scroll.pkgd.min.js"></script>
+    <script>
+        let elem = document.querySelector('.grid');
+        let infScroll = new InfiniteScroll( elem, {
+            path: '/search/page/@{{#}}',
+            append: '.tvShowCard',
+            status: '.page-load-status'
+        });
+    </script>
 @endsection
