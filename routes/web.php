@@ -5,6 +5,7 @@ use App\Http\Controllers\TVController;
 use App\Http\Controllers\ActorsController;
 use App\Http\Controllers\MoviesController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\KoreanDramaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,6 @@ Route::get('/actors/{actor}', [ActorsController::class, 'show'])->name('actors.s
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::get('/search/page/{number?}', [SearchController::class, 'search']);
 Route::post('/search', [SearchController::class, 'search'])->name('postSearch');
+
+Route::get('/korean-drama', [KoreanDramaController::class, 'index'])->name('koreanDrama.index');
+Route::get('/korean-drama/page/{number?}', [KoreanDramaController::class, 'index']);
