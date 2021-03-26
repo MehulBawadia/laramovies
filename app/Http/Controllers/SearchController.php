@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class SearchController extends Controller
 {
@@ -11,9 +12,16 @@ class SearchController extends Controller
     {
         session()->forget(['searchResults', 'formData']);
 
-        $genres = $this->genres();
+        $searchResults = Cache::remember('defaultResults', 5, function () {
+            return Http::withToken(config('services.tmdb.token'))
+                    ->get(config('services.tmdb.base_url') . '/discover/tv?with_original_language=ko&first_air_date_year=' . date('Y'))
+                    ->json()['results'];
+        });
 
-        return view('search', compact('genres'));
+        $genres = $this->genres();
+        $searchResults = $this->format($searchResults);
+
+        return view('search', compact('genres', 'searchResults'));
     }
 
     public function search()
@@ -61,23 +69,30 @@ class SearchController extends Controller
 
     private function genres()
     {
-        $genres = Http::withToken(config('services.tmdb.token'))
-                            ->get(config('services.tmdb.base_url') . '/genre/movie/list')
-                            ->json()['genres'];
+        Cache::remember('tvGenres', 5, function () {
+            $genres = Http::withToken(config('services.tmdb.token'))
+                        ->get(config('services.tmdb.base_url') . '/genre/tv/list')
+                        ->json()['genres'];
 
-        $genres = collect($genres)->mapWithKeys(function ($genre) {
-            return [$genre['id'] => $genre['name']];
+            return collect($genres)->mapWithKeys(function ($genre) {
+                return [$genre['id'] => $genre['name']];
+            });
         });
 
-        $tvGenres = Http::withToken(config('services.tmdb.token'))
-                            ->get(config('services.tmdb.base_url') . '/genre/tv/list')
-                            ->json()['genres'];
+        Cache::remember('movieGenres', 5, function () {
+            $genres = Http::withToken(config('services.tmdb.token'))
+                        ->get(config('services.tmdb.base_url') . '/genre/movie/list')
+                        ->json()['genres'];
 
-        $tvGenres = collect($tvGenres)->mapWithKeys(function ($genre) {
-            return [$genre['id'] => $genre['name']];
+            return collect($genres)->mapWithKeys(function ($genre) {
+                return [$genre['id'] => $genre['name']];
+            });
         });
 
-        return $genres->merge($tvGenres)->unique()->sort();
+        $genres = cache('movieGenres');
+        $tvGenres = cache('tvGenres');
+
+        return $genres->union($tvGenres)->sort();
     }
 
     private function format($tv)
@@ -90,7 +105,9 @@ class SearchController extends Controller
             $releaseDate = $show['first_air_date'] ?? $show['release_date'];
 
             return collect($show)->merge([
-                'poster_path' => 'https://image.tmdb.org/t/p/w500' . $show['poster_path'],
+                'poster_path' => $show['poster_path']
+                                    ? 'https://image.tmdb.org/t/p/w500' . $show['poster_path']
+                                    : 'https://via.placeholder.com/500x750',
                 'vote_average' => $show['vote_average'] * 10 . '%',
                 'release_date' => Carbon::parse($releaseDate)->format('M d, Y'),
                 'genres' => $formattedGenres->implode(', '),

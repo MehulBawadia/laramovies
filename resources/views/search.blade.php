@@ -49,11 +49,9 @@
 
             <div class="px-8 py-16 results">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-                    @if (session('formData')['movie_or_tv'] == 'tv')
-                        @foreach (session('searchResults') as $result)
-                            <x-tv-card :tvShow="$result" :genres="$genres" />
-                        @endforeach
-                    @endif
+                    @foreach ($searchResults as $result)
+                        <x-tv-card :tvShow="$result" :genres="$genres" />
+                    @endforeach
 
                     @if (session('formData')['movie_or_tv'] == 'movie')
                         @foreach (session('searchResults') as $result)
